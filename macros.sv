@@ -1,0 +1,2 @@
+`define GRID_SIZE 10 
+`define TEST_GENERATIONS 10 
