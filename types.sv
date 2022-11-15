@@ -8,7 +8,7 @@ typedef byte pixelbuffer[`RESOLUTION_X*`RESOLUTION_Y*3];
 
 typedef struct packed {
     logic pause;
-    bit moveleft, moveright, moveup, movedown, toggle;
+    bit moveleft, moveright, moveup, movedown, toggle, reset;
     logic clk; // Input clock from device or testbench
 } golcontrols;
 

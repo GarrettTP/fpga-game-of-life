@@ -10,7 +10,7 @@ module controller(controls, game, gridupdate, updatesignal, pause, x, y, current
     output bit currentcellselected;
 
     bit flipflop;
-    grid_t gridzero;
+    grid_t emptygrid;
 
     always_ff @(posedge controls.pause) begin
         pause = ~pause;
@@ -20,7 +20,7 @@ module controller(controls, game, gridupdate, updatesignal, pause, x, y, current
     always_ff @(posedge controls.clk) begin
         if (pause) begin
             if (flipflop) begin
-                if (!(controls.moveleft | controls.moveright | controls.moveup | controls.movedown | controls.toggle)) begin
+                if (!(controls.moveleft | controls.moveright | controls.moveup | controls.movedown | controls.toggle | controls.reset)) begin
                     flipflop = 0'b0;
                     updatesignal = 1'b0;
                 end
@@ -39,10 +39,15 @@ module controller(controls, game, gridupdate, updatesignal, pause, x, y, current
                 else
                     currentcellselected = 1'b0;
 
-                flipflop = controls.moveleft | controls.moveright | controls.moveup | controls.movedown | controls.toggle;
+                if (controls.reset) begin
+                    gridupdate = emptygrid;
+                end
+
+                flipflop = controls.moveleft | controls.moveright | controls.moveup | controls.movedown | controls.toggle | controls.reset;
                 updatesignal = flipflop;
             end
-        end else begin
+        end
+        else begin
             gridupdate <= game.grid;
         end
     end

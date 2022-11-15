@@ -29,10 +29,7 @@ module gameoflife(controls, game);
 
     // Set up game clock
     `ifdef TESTBENCH
-        initial begin
-            game.clk = 1'b1;
-            forever #20 game.clk = ~game.clk;
-        end
+        assign game.clk = controls.clk;
     `else
         clk_div div(controls.clk, game.paused, game.clk);
     `endif
