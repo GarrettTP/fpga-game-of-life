@@ -21,7 +21,7 @@ typedef struct packed {
     grid_t gridevolve;
     int generation;
     int selectedx, selectedy;
-    bit currentcellselected;
+    bit currentcellalive;
     machinestate state;
     machinestate nextstate;
     logic clk; // Game clock used to update the state of the game

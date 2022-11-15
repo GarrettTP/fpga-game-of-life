@@ -11,4 +11,4 @@ module clk_div (input logic clk, input logic rst, output logic clk_en);
    
    assign clk_en = clk_count[25];
    
-endmodule // clk_div
+endmodule

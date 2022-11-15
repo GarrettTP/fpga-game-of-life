@@ -1,13 +1,14 @@
 `include "types.sv"
 
-module controller(controls, game, gridupdate, updatesignal, pause, x, y, currentcellselected);
+// Handles all input to the game
+module controller(controls, game, gridupdate, updatesignal, pause, x, y, currentcellalive);
     input golcontrols controls;
     input golmachine game;
     output grid_t gridupdate;
     output bit updatesignal;
     output bit pause;
     output int x, y;
-    output bit currentcellselected;
+    output bit currentcellalive;
 
     bit flipflop;
     grid_t emptygrid;
@@ -33,11 +34,11 @@ module controller(controls, game, gridupdate, updatesignal, pause, x, y, current
                 y = y < 0 ? `GRID_SIZE - 1 : (y == `GRID_SIZE ? 0 : y);
                 
                 if (controls.toggle) begin
-                    currentcellselected = ~gridupdate[x + y * `GRID_SIZE];
-                    gridupdate[x + y * `GRID_SIZE] = currentcellselected;
+                    currentcellalive = ~gridupdate[x + y * `GRID_SIZE];
+                    gridupdate[x + y * `GRID_SIZE] = currentcellalive;
                 end
                 else
-                    currentcellselected = 1'b0;
+                    currentcellalive = 1'b0;
 
                 if (controls.reset) begin
                     gridupdate = emptygrid;

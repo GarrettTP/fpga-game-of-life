@@ -2,6 +2,7 @@
 
 `define DISPLAY_CONTROL_UPDATES 0
 
+// Displays updates to the output window
 module display_tb(controls, game);
     input golcontrols controls;
     input golmachine game;
@@ -21,7 +22,7 @@ module display_tb(controls, game);
 
 endmodule
 
-
+// Renders updates as .tga images
 module display_tga(controls, game);
     input golcontrols controls;
     input golmachine game;
@@ -50,7 +51,7 @@ module display_tga(controls, game);
     end
 endmodule
 
-
+// Top level testbench module
 module stimulus();
     golcontrols controls;
     golmachine game;

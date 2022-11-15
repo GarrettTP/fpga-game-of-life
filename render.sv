@@ -81,9 +81,9 @@ function void tgarender(input golmachine game, int img);
             if (iscell) begin
                 cellalive = game.grid[gridy*`GRID_SIZE+gridx];
                 color = {
-                    game.currentcellselected & isselected ? 8'h80 : isselected ? 8'h80 : cellalive ? 8'h00 : 8'hff,
-                    game.currentcellselected & isselected ? 8'hff : isselected ? 8'h80 : cellalive ? 8'h80 : 8'hff,
-                    game.currentcellselected & isselected ? 8'hff : isselected ? 8'h80 : cellalive ? 8'hff : 8'hff
+                    game.currentcellalive & isselected ? 8'h80 : isselected ? 8'h80 : cellalive ? 8'h00 : 8'hff,
+                    game.currentcellalive & isselected ? 8'hff : isselected ? 8'h80 : cellalive ? 8'h80 : 8'hff,
+                    game.currentcellalive & isselected ? 8'hff : isselected ? 8'h80 : cellalive ? 8'hff : 8'hff
                 };
             end
             else begin

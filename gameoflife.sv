@@ -7,6 +7,7 @@
             - Left, right, up, down button to select cells
             - Toggle button to toggle state of selected cell
         - LCD visualizer and command prompt visualizer (testing)
+        - .tga rendering output just because
 */
 
 `include "types.sv"
@@ -16,16 +17,16 @@ module gameoflife(controls, game);
     input golcontrols controls;
     output golmachine game;
 
-    grid_t gridupdate;
-    logic ctrlupdatesignal;
-    int selectedx, selectedy;
-    bit currentcellselected;
-    controller ctrl (controls, game, gridupdate, ctrlupdatesignal, game.paused, selectedx, selectedy, currentcellselected);
+    grid_t gridupdate; // The next updated version of the grid
+    logic ctrlupdatesignal; // posedge when control input changes
+    int selectedx, selectedy; // The x and y coordinates of the currently selected cell
+    bit currentcellalive; // Whether or not the cell that is selected is alive
+    controller ctrl (controls, game, gridupdate, ctrlupdatesignal, game.paused, selectedx, selectedy, currentcellalive);
 
     assign game.selectedx = selectedx;
     assign game.selectedy = selectedy;
     assign game.controlsignal = ctrlupdatesignal;
-    assign game.currentcellselected = currentcellselected;
+    assign game.currentcellalive = currentcellalive;
 
     // Set up game clock
     `ifdef TESTBENCH
