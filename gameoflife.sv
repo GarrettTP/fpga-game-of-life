@@ -18,60 +18,47 @@ module gameoflife(controls, game);
 
     grid_t gridupdate;
     logic ctrlupdatesignal;
-    controller ctrl (controls, game, gridupdate, ctrlupdatesignal, game.paused);
+    int selectedx, selectedy;
+    bit currentcellselected;
+    controller ctrl (controls, game, gridupdate, ctrlupdatesignal, game.paused, selectedx, selectedy, currentcellselected);
+
+    assign game.selectedx = selectedx;
+    assign game.selectedy = selectedy;
+    assign game.controlsignal = ctrlupdatesignal;
+    assign game.currentcellselected = currentcellselected;
 
     // Set up game clock
     `ifdef TESTBENCH
-    initial begin
-	    game.clk = 1'b1;
-	    forever #20 game.clk = ~game.clk;
-    end
+        initial begin
+            game.clk = 1'b1;
+            forever #20 game.clk = ~game.clk;
+        end
     `else
-    clk_div div(controls.clk, game.paused, game.clk);
+        clk_div div(controls.clk, game.paused, game.clk);
     `endif
 
+    // Connect datapath to grid
     datapath dp (game.grid, game.gridevolve);
 
-    always_ff @(posedge controls.clk) begin
-        if (game.paused) game.state <= UPDATE;
-        else game.state <= game.nextstate;
-    end
-
-    // logic simupdatesignal;
-    // assign game.updatesignal = simupdatesignal;
-
-    always_comb begin
-        if (ctrlupdatesignal) begin
+    // Build state machine and update signals
+    always_ff @(posedge game.clk, posedge game.controlsignal) begin
+        if (game.paused) begin
+            game.grid = gridupdate;
             game.generation = 1;
-            game.grid <= gridupdate; // Use the updated grid when simulation is paused
-            game.updatesignal <= 1'b1;
         end
-        else if (game.paused) begin
-            game.updatesignal <= 1'b0;
+        else if (game.state == UPDATE) begin
+            game.updatesignal = 1'b1;
+            game.state = STEP;
         end
         else begin
-            case (game.state)
-                UPDATE: begin
-                    game.updatesignal <= 1'b1;
-
-                    if (game.clk) game.nextstate <= UPDATE;
-                    else game.nextstate <= STEP;
-                end
-                STEP: begin
-                    if (game.updatesignal) begin
-                        game.grid <= game.gridevolve; // Evolve grid
-                        game.generation += 1;
-                    end
-                    game.updatesignal <= 1'b0; // Reset update signal
-
-                    if (game.clk) game.nextstate <= UPDATE;
-                    else game.nextstate <= STEP;
-                end
-                default: begin
-                    game.generation = 1;
-                    game.nextstate <= UPDATE;
-                end
-            endcase
+            game.grid = game.gridevolve;
+            game.generation++;
+            game.state = UPDATE;
         end
     end
+
+    always_ff @(negedge game.clk) begin
+        game.updatesignal = 1'b0;
+    end
+
 endmodule

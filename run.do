@@ -1,4 +1,9 @@
-#vsim -do run.do -c
+# Use this run.do file to run this example.
+# Either bring up ModelSim and type the following at the "ModelSim>" prompt:
+#     do run.do
+# or, to run from a shell, type the following at the shell prompt:
+#     vsim -do run.do -c
+# (omit the "-c" to see the GUI while running from the shell)
 
 onbreak {resume}
 
