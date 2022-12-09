@@ -13,10 +13,21 @@ module controller(controls, game, gridupdate, updatesignal, pause, x, y, current
     bit flipflop;
     grid_t emptygrid;
 
-    always_ff @(posedge controls.pause) begin
-        pause = ~pause;
-        updatesignal = pause;
-    end
+    // always_ff @(posedge controls.pause) begin
+    //     pause = ~pause;
+    //     updatesignal = pause;
+    // end
+    // logic paused;
+    // always_ff @(posedge controls.clk) begin
+    //     if (controls.pause & ~paused) begin
+    //         pause <= ~pause;
+    //         paused <= 1'b1;
+    //     end
+    //     else if (~controls.pause & paused) begin
+    //         paused = 1'b0;
+    //     end
+    // end
+    assign pause = controls.pause;
 
     always_ff @(posedge controls.clk) begin
         if (pause) begin

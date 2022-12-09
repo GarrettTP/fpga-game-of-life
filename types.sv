@@ -12,7 +12,7 @@ typedef struct packed {
     logic clk; // Input clock from device or testbench
 } golcontrols;
 
-typedef enum bit [0:0] {STEP, UPDATE} machinestate;
+typedef enum logic [1:0] {PAUSED, STEP, UPDATE} machinestate;
 typedef bit[`GRID_SIZE*`GRID_SIZE-1:0] grid_t;
 
 typedef struct packed {
@@ -20,6 +20,7 @@ typedef struct packed {
     grid_t grid;
     grid_t gridevolve;
     int generation;
+    int lastgeneration;
     int selectedx, selectedy;
     bit currentcellalive;
     machinestate state;

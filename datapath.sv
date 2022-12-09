@@ -1,9 +1,8 @@
 /*
  
  Conway's Game of Life modeled in SVerilog
-
  
- */
+*/
 
 `include "types.sv"
 

@@ -72,7 +72,7 @@ module stimulus();
         controls.moveup = 1'b0;
         controls.movedown = 1'b0;
 	    controls.clk = 1'b1;
-	    forever #1 controls.clk = ~controls.clk;
+	    forever #1 controls.clk <= ~controls.clk;
     end
 
     initial begin

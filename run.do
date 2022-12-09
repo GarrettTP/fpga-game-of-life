@@ -14,7 +14,7 @@ if [file exists work] {
 vlib work
 
 # compile source files
-vlog controller.sv datapath.sv gameoflife.sv gameoflife_tb.sv +define+TESTBENCH
+vlog types.sv controller.sv datapath.sv gameoflife.sv gameoflife_tb.sv +define+TESTBENCH
 
 # start and run simulation
 vsim -voptargs=+acc work.stimulus

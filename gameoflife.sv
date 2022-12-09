@@ -30,7 +30,10 @@ module gameoflife(controls, game);
 
     // Set up game clock
     `ifdef TESTBENCH
-        assign game.clk = controls.clk;
+        initial begin	
+            game.clk = 1'b1;
+            forever #10 game.clk = ~game.clk;
+        end
     `else
         clk_div div(controls.clk, game.paused, game.clk);
     `endif
@@ -38,25 +41,45 @@ module gameoflife(controls, game);
     // Connect datapath to grid
     datapath dp (game.grid, game.gridevolve);
 
-    // Build state machine and update signals
-    always_ff @(posedge game.clk, posedge game.controlsignal) begin
-        if (game.paused) begin
-            game.grid = gridupdate;
-            game.generation = 1;
-        end
-        else if (game.state == UPDATE) begin
-            game.updatesignal = 1'b1;
-            game.state = STEP;
-        end
-        else begin
-            game.grid = game.gridevolve;
-            game.generation++;
-            game.state = UPDATE;
-        end
+    always_ff @(posedge controls.clk) begin
+        if (game.paused) game.state <= PAUSED;
+        else game.state <= game.nextstate;
     end
 
-    always_ff @(negedge game.clk) begin
-        game.updatesignal = 1'b0;
+    always_comb begin
+        case (game.state)
+        PAUSED: begin
+            game.grid <= gridupdate;
+            game.generation <= 1;
+            game.updatesignal <= 1'b0;
+
+            // Set state to update
+            if (game.clk) game.nextstate <= PAUSED;
+            else game.nextstate <= UPDATE;
+        end
+        STEP: begin
+            game.grid <= game.updatesignal ? game.gridevolve : game.grid;
+            game.updatesignal <= 1'b0;
+            game.generation <= game.lastgeneration + 1;
+            
+            // Set state to update
+            if (game.clk) game.nextstate <= STEP;
+            else game.nextstate <= UPDATE;
+        end
+        UPDATE: begin
+            game.updatesignal <= 1'b1;
+            game.lastgeneration <= game.generation;
+
+            // Set state to step
+            if (game.clk) game.nextstate <= STEP;
+            else game.nextstate <= UPDATE;
+        end
+        default: begin
+            game.lastgeneration <= 0;
+            
+            if (game.clk) game.nextstate <= STEP;
+        end
+        endcase
     end
 
 endmodule

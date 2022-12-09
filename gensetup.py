@@ -22,7 +22,7 @@ if len(out) != len(contents):
     f.close()
     os.system("pause")
 
-setup = "#5 controls.pause = 1'b1; #5 controls.pause = 1'b0;\n"
+setup = "#5 controls.pause = 1'b1;\n"
 with open('setup.txt', 'r') as file:
     for line in file:     
         for word in line.split():
@@ -31,7 +31,7 @@ with open('setup.txt', 'r') as file:
             setup += "#5 controls.moveright = 1'b1; #5 controls.moveright = 1'b0;\n"
         setup += "#5 controls.movedown = 1'b1; #5 controls.movedown = 1'b0;\n"
 
-setup += "#5 controls.pause = 1'b1; #5 controls.pause = 1'b0;\n"
+setup += "#5 controls.pause = 1'b0;\n"
 
 f = open("setup_autogen.sv", "w")
 f.write(setup)

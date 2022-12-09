@@ -1,4 +1,4 @@
-#5 controls.pause = 1'b1; #5 controls.pause = 1'b0;
+#5 controls.pause = 1'b1;
 #5 controls.moveright = 1'b1; #5 controls.moveright = 1'b0;
 #5 controls.moveright = 1'b1; #5 controls.moveright = 1'b0;
 #5 controls.moveright = 1'b1; #5 controls.moveright = 1'b0;
@@ -124,4 +124,4 @@
 #5 controls.moveright = 1'b1; #5 controls.moveright = 1'b0;
 #5 controls.moveright = 1'b1; #5 controls.moveright = 1'b0;
 #5 controls.movedown = 1'b1; #5 controls.movedown = 1'b0;
-#5 controls.pause = 1'b1; #5 controls.pause = 1'b0;
+#5 controls.pause = 1'b0;
