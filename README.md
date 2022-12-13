@@ -10,7 +10,7 @@ Game of life written in HDL using SystemVerilog.
 `run.bat (grid_size) (test_generations)` where grid_size is the number of rows/columns on the grid and test_generations is the number of generations to simluate. If asked to edit the 'setup.txt' file, modify and save the file before continuing.
 * Running `build.bat (grid_size)` will generate the necessary utility files without running a simulation.
 * If you do not have Python you can run the current test setup using `vsim -do run.do -c` but you will not be able to change the grid size or number of test generations.
-* The Python extension Pillow is required for automatic image conversion, although it will still output images to .tga format without Pillow.
+* The Python extension Pillow is required for automatic image conversion to .png, although it will still output images to .tga format without Pillow.
 Use `py -m pip install --upgrade Pillow` to install Pillow before running the first simulation.
 
 ## Sample renders
