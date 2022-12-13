@@ -2,7 +2,7 @@
 Game of life written in HDL using SystemVerilog.
 
 ## Required utilities
-- Python
+- Python (optional)
 - SystemVerilog/ModelSim
 - Windows
 
