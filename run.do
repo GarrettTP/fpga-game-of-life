@@ -29,7 +29,7 @@ add wave -noupdate -divider -height 32 "Game of Life"
 # add wave -hex -r /stimulus/*
 add wave -hex /stimulus/controls
 add wave -hex /stimulus/game
-add wave -hex -r /stimulus/*
+# add wave -hex -r /stimulus/*
 
 # add list -hex -r /stimulus/*
 # add log -r /*

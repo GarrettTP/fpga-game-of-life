@@ -1,0 +1,103 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
+-------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2022.2 (win64) Build 3671981 Fri Oct 14 05:00:03 MDT 2022
+| Date         : Thu Dec  8 17:19:16 2022
+| Host         : Garretts-Surface-Book running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file top_demo_control_sets_placed.rpt
+| Design       : top_demo
+| Device       : xc7z020
+-------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    25 |
+|    Minimum number of control sets                        |    25 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |   109 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    25 |
+| >= 0 to < 4        |     4 |
+| >= 4 to < 6        |     1 |
+| >= 6 to < 8        |     2 |
+| >= 8 to < 10       |     1 |
+| >= 10 to < 12      |     5 |
+| >= 12 to < 14      |     1 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    11 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             184 |          113 |
+| No           | No                    | Yes                    |               0 |            0 |
+| No           | Yes                   | No                     |             102 |           32 |
+| Yes          | No                    | No                     |              69 |           29 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |             104 |           31 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++------------------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+------------------+----------------+--------------+
+|                  Clock Signal                  |                                              Enable Signal                                              |                                             Set/Reset Signal                                            | Slice Load Count | Bel Load Count | Bels / Slice |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+------------------+----------------+--------------+
+|  nolabel_line70/game_reg[updatesignal]_i_1_n_1 |                                                                                                         |                                                                                                         |                1 |              1 |         1.00 |
+|  test/hdmi_pll/CLK                             |                                                                                                         |                                                                                                         |                2 |              2 |         1.00 |
+|  nolabel_line70/div/E[0]                       |                                                                                                         |                                                                                                         |                1 |              2 |         2.00 |
+|  driver/smol_clk                               |                                                                                                         |                                                                                                         |                1 |              2 |         2.00 |
+|  test/hdmi_pll/clk_out1                        | test/hdmi/true_hdmi_output.data_island_period                                                           |                                                                                                         |                3 |              5 |         1.67 |
+|  test/hdmi_pll/clk_out1                        | test/hdmi/true_hdmi_output.packet_picker/frame_counter[7]_i_1_n_1                                       |                                                                                                         |                2 |              6 |         3.00 |
+|  test/hdmi_pll/CLK                             |                                                                                                         | test/hdmi/true_hdmi_output.packet_picker/audio_clock_regeneration_packet/clk_audio_counter[5]_i_1_n_1   |                2 |              6 |         3.00 |
+|  test/hdmi_pll/clk_out1                        | test/hdmi/true_hdmi_output.packet_assembler/parity                                                      | test/hdmi/true_hdmi_output.packet_assembler/parity[4][7]_i_1_n_1                                        |                3 |              8 |         2.67 |
+|  test/hdmi_pll/clk_out1                        | test/hdmi/cy0                                                                                           |                                                                                                         |                5 |             10 |         2.00 |
+|  test/hdmi_pll/clk_out1                        | test/hdmi/tmds_gen[0].tmds_channel/tmds[9]_i_2__0_n_1                                                   | test/hdmi/tmds_gen[0].tmds_channel/tmds[9]_i_1__0_n_1                                                   |                5 |             10 |         2.00 |
+|  sysclk_125mhz_IBUF_BUFG                       | nolabel_line70/ctrl/x[5]_i_1_n_1                                                                        |                                                                                                         |                5 |             10 |         2.00 |
+|  test/hdmi_pll/clk_out1                        |                                                                                                         | test/hdmi/cx[10]_i_1_n_1                                                                                |                5 |             11 |         2.20 |
+|  test/hdmi_pll/clk_out1                        |                                                                                                         | test/p_0_in                                                                                             |                3 |             11 |         3.67 |
+|  test/hdmi_pll/clk_out1                        |                                                                                                         | test/hdmi/tmds_gen[2].tmds_channel/SR[0]                                                                |                5 |             12 |         2.40 |
+|  test/hdmi_pll/clk_out1                        |                                                                                                         | test/hdmi/true_hdmi_output.packet_picker/audio_clock_regeneration_packet/clk_audio_counter_wrap_i_1_n_1 |                5 |             17 |         3.40 |
+|  sysclk_125mhz_IBUF_BUFG                       |                                                                                                         | CURRENT_COUNT[0]_i_1_n_1                                                                                |                5 |             17 |         3.40 |
+|  test/hdmi_pll/clk_out1                        | test/hdmi/true_hdmi_output.packet_picker/audio_clock_regeneration_packet/clk_audio_counter_wrap_i_1_n_1 |                                                                                                         |                6 |             18 |         3.00 |
+|  test/hdmi_pll/clk_out1                        | test/hdmi/tmds_gen[1].tmds_channel/E[0]                                                                 |                                                                                                         |                8 |             20 |         2.50 |
+|  sysclk_125mhz_IBUF_BUFG                       | nolabel_line70/ctrl/x[5]_i_1_n_1                                                                        | nolabel_line70/ctrl/x[31]_i_1_n_1                                                                       |                7 |             26 |         3.71 |
+|  sysclk_125mhz_IBUF_BUFG                       |                                                                                                         | sw_IBUF[7]                                                                                              |                7 |             28 |         4.00 |
+|  sysclk_125mhz_IBUF_BUFG                       | nolabel_line70/ctrl/x[5]_i_1_n_1                                                                        | nolabel_line70/ctrl/y[31]_i_1_n_1                                                                       |                7 |             28 |         4.00 |
+|  test/hdmi_pll/clk_out1                        | test/hdmi/true_hdmi_output.packet_assembler/parity[0][7]_i_1_n_1                                        | test/hdmi/true_hdmi_output.packet_assembler/parity[4][7]_i_1_n_1                                        |                9 |             32 |         3.56 |
+|  test/hdmi_pll/clk_out1                        |                                                                                                         |                                                                                                         |               20 |             45 |         2.25 |
+|  n_0_812_BUFG                                  |                                                                                                         |                                                                                                         |               46 |             64 |         1.39 |
+|  sysclk_125mhz_IBUF_BUFG                       |                                                                                                         |                                                                                                         |               42 |             68 |         1.62 |
++------------------------------------------------+---------------------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------+------------------+----------------+--------------+
+
+
