@@ -1,6 +1,8 @@
 # fpga-game-of-life
 Game of life written in HDL using SystemVerilog.
 
+See the [project report](project-report.pdf).
+
 ## Required utilities
 - Python (optional)
 - SystemVerilog/ModelSim
